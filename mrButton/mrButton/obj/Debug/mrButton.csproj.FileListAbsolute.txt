@@ -1,0 +1,9 @@
+C:\Users\User\source\repos\mrButton\mrButton\bin\Debug\mrButton.exe.config
+C:\Users\User\source\repos\mrButton\mrButton\bin\Debug\mrButton.exe
+C:\Users\User\source\repos\mrButton\mrButton\bin\Debug\mrButton.pdb
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.csprojAssemblyReference.cache
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.Properties.Resources.resources
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.csproj.GenerateResource.cache
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.exe
+C:\Users\User\source\repos\mrButton\mrButton\obj\Debug\mrButton.pdb
