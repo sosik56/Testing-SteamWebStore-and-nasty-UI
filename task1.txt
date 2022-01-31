@@ -1,26 +1,29 @@
  
       НАЗВАНИЕ ЭЛЕМЕНТА                                                  xPath                                                      CSS
 
-Элемент заголовка страницы                       //div[@id='content']//child::h3                                            #content h3
+Элемент заголовка страницы                       //div[@id='content']//child::h3                                                  #content h3
 
-Кнопка 'Add Element'         			//div[@class='example']//child::button			                    .example button
+Кнопка 'Add Element'         			//div[@class='example']//child::button			                          .example button
                                                 //div[@id='elements']//preceding-sibling::button
 
 
-Элемент ссылки в футере сайта                   //div[@id='page-footer']//child::div[contains(@style,'text-align')]         #page-footer div[style*=text-align]
+Элемент ссылки в футере сайта                   //div[@id='page-footer']//child::a                                                 #page-footer a
 
 
-Элемент заголовка страницы                     //div[@class="example"]//child::h3                                           .example h3
+Элемент заголовка страницы                     //div[@class="example"]//child::h3                                                 .example h3
 
-Список элементов из заголовков таблицы1        //table[@id='table1']//child::thead                                           table#table1 thead
+Список элементов из заголовков таблицы1        //table[@id='table1']//child::thead                                                table#table1 thead
 
-Список элементов таблицы2                      //table[@id='table2']//child::tbody                                           table#table2 tbody
+Список элементов таблицы2                      //table[@id='table2']//child::tbody                                                table#table2 tbody
+ 
 
-
-Элемент ячейки, которая содержит              //table[@id='table2']//child::tbody//td[text()='John']                         table#table2  td:contains('John')(не работает)
+Элемент ячейки, которая содержит              //table[@id='table2']//child::tbody//td[text()='John']                              table#table2  td:contains('John')(не работает)
 имя "John" из таблицы 2
 
 
-Элемент со значением веб сайта               //table[@id='table1']//child::td[contains(text(),'www.jdoe')]                   table#table1  td:contains('www.jdoe')(не раб)
-для человека  с фамилией "Doe" и
+Элемент со значением веб сайта               //table[@id="table1"]//td[text()="Doe"]/parent::tr/td[contains(text(),"http://")]    table#table1  td:contains('www.jdoe')(не раб)
+для человека  с фамилией "Doe" и	    	
 именем "Jason" из таблицы 1
+
+
+
