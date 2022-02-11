@@ -1,0 +1,8 @@
+{
+    "GameName": "Dota 2",
+    "HeroName": "Lifestealer",
+    "RareCheckBoxes": [
+        "Immortal"
+    ],
+    "InputForSearchField": "golden"
+}

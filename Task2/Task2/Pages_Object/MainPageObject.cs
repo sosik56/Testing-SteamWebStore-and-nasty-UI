@@ -1,14 +1,12 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace Task2.Pages_Object
 {
-    class MainPageObject
+    public class MainPageObject
     {
-        private By _mainPageLocator = By.XPath("//div[contains(@class,'home_page')]");
-        
+        private By _mainPageLocator = By.XPath("//div[contains(@class,'home_page')]");        
       
-        public bool atPage(IWebDriver driver)
+        public bool IsPageOpen(IWebDriver driver)
         {
             return driver.FindElements(_mainPageLocator).Count > 0;
         }        
