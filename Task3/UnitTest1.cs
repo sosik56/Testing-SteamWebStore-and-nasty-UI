@@ -9,6 +9,7 @@ namespace Task3
         [SetUp]
         public void Setup()
         {
+            string shsis;
         }
 
         [Test]
