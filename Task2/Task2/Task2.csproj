@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resourses\configJSON.json" />
+    <None Remove="Resourses\data.json" />
+    <None Remove="Resourses\jsonForAdvancedSearch.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resourses\configJSON.json" />
+    <EmbeddedResource Include="Resourses\data.json" />
+    <EmbeddedResource Include="Resourses\jsonForAdvancedSearch.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

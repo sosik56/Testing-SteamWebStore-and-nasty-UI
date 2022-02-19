@@ -11,13 +11,15 @@ using System;
 namespace Task2.Utility
 {
     public static  class BrowserFactory
-    {     
-        public static  IWebDriver InitializeBrowser(string browserTypeStr, List<string> arguments)
+    {        
+        public static  IWebDriver InitializeBrowser()
         {
+            List<string> arguments = UtilityClass.ConfigData.Arguments;
             BrowserTypes browserType;
+
             try
             {
-                browserType = (BrowserTypes)Enum.Parse(typeof(BrowserTypes), browserTypeStr.ToLower());
+                browserType = (BrowserTypes)Enum.Parse(typeof(BrowserTypes), UtilityClass.ConfigData.BrowserType.ToLower());
             }
             catch (Exception)
             {
@@ -63,9 +65,8 @@ namespace Task2.Utility
                     driver = new OperaDriver(optionOpera);
                     return driver;
 
-                default:
-                    System.Console.WriteLine("No apropriate data");
-                    return null;
+                default:                    
+                     throw new Exception("No apropriate data");
             }
         }
     }

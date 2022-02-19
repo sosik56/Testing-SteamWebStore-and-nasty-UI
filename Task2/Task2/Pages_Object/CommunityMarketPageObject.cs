@@ -4,7 +4,7 @@ using Task2.ForData;
 namespace Task2.Pages_Object
 {
     public class CommunityMarketPageObject
-    {   
+    {      
         private By SearchResualt(string item) => By.XPath($"//span[contains(@id,'result_{item}')]");        
 
         private By atPageLocator = By.Id("popularItemsRows");
@@ -17,19 +17,22 @@ namespace Task2.Pages_Object
         private By serchResults = By.XPath("//span[contains(@id,'result')]");    
 
 
-        public bool IsPageOpen(IWebDriver driver,int waitSec)
+        public bool IsPageOpen()
         {
-            Expectations.WaitUntilVisible(driver, atPageLocator, waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(atPageLocator);
             return driver.FindElements(atPageLocator).Count > 0;
         } 
-        public void ClickShowAdvancedMarket(IWebDriver driver, int waitSec)
+        public void ClickShowAdvancedMarket()
         {
-            Expectations.WaitUntilCkicable(driver, showAdvancedMarket, waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilCkicable(showAdvancedMarket);
             driver.FindElement(showAdvancedMarket).Click();
         }        
 
-        public bool AreFiltersHere(IWebDriver driver, MarketAdvencedSearch data)
+        public bool AreFiltersHere(MarketAdvencedSearch data)
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             int iteration = 3;
             int numb = 0;
             numb += driver.FindElements(IsFilterHere(data.GameName)).Count;           
@@ -43,13 +46,14 @@ namespace Task2.Pages_Object
             return numb == iteration;
         }
 
-        public bool AreFirstFiveResultsContaisGolden(IWebDriver driver, int waitSec)
+        public bool AreFirstFiveResultsContaisGolden()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             string str;
             int answer = 0;
             for (int i = 0; i < 5; i++)
             {
-                Expectations.WaitUntilVisible(driver, SearchResualt(i.ToString()), waitSec);
+                Expectations.WaitUntilVisible(SearchResualt(i.ToString()));
                 str = driver.FindElement(SearchResualt(i.ToString())).Text;
                 if (str.Contains("Golden"))
                     answer++;
@@ -57,25 +61,29 @@ namespace Task2.Pages_Object
             return answer == 5;
         }
        
-        public int ReturnAmountOfResualts(IWebDriver driver)
+        public int ReturnAmountOfResualts()
         {
-           return driver.FindElements(serchResults).Count;
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            return driver.FindElements(serchResults).Count;
         }
-        public void RemoveGoldenAndDotaFilters(IWebDriver driver, params string[] parameters)
+        public void RemoveGoldenAndDotaFilters(params string[] parameters)
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             foreach (var item in parameters)
             {
                 driver.FindElement(RemoveFilter(item)).Click();
             }            
         }
-        public string GetFirstResualtName(IWebDriver driver,int waitSec)
+        public string GetFirstResualtName()
         {
-            Expectations.WaitUntilVisible(driver, firstResult, waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(firstResult);
             return driver.FindElement(firstResult).Text;
         }               
 
-        public void ClickFirstResult(IWebDriver driver)
+        public void ClickFirstResult()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             driver.FindElement(firstResult).Click();
         }       
 

@@ -8,9 +8,10 @@ namespace Task2.Pages_Object
     {
         private  By _gamersOnline = By.XPath("//div[contains(@class,'gamers_online')]/ancestor::div[@class='online_stat']"); 
         private By _gamersInGame = By.XPath("//div[contains(@class,'gamers_in_game')]/ancestor::div[@class='online_stat']");
-        
-        public bool IsGamersOnlineMoreInGame(IWebDriver driver)
+
+        public bool IsGamersOnlineMoreInGame()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             string gamersOnlineStrDirty = driver.FindElement(_gamersOnline).Text;
             string gamersInGameStrDirty = driver.FindElement(_gamersInGame).Text;            
 
@@ -19,9 +20,10 @@ namespace Task2.Pages_Object
             return gamersOnline > gamersInGame;
         }
 
-        public bool IsPageOpen(IWebDriver driver, int waitSec)
+        public bool IsPageOpen()
         {
-            Expectations.WaitUntilVisible(driver, _gamersInGame, waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(_gamersInGame);
             return driver.FindElements(_gamersInGame).Count()>0;
         }                        
     }

@@ -1,14 +1,18 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Task2.Utility;
 
 namespace Task2
 {
     public static class Expectations
     {
-        public static void WaitUntilVisible(IWebDriver driver, By by, int seconds)
+        public static int waitSec = UtilityClass.ConfigData.WaitingTime;
+        
+        public static void WaitUntilVisible(By by)
         {
-            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            var driver = DriverSingltone.InizializeWebDriver();
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
             try
             {                
                 wait.Until(ExpectedConditions.ElementIsVisible(by));
@@ -20,9 +24,10 @@ namespace Task2
             }                        
         }
 
-        public static void WaitUntilCkicable(IWebDriver driver, By by, int seconds)
+        public static void WaitUntilCkicable(By by)
         {
-            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            var driver = DriverSingltone.InizializeWebDriver();
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
             try
             {
                 wait.Until(ExpectedConditions.ElementToBeClickable(by));
@@ -35,9 +40,10 @@ namespace Task2
             }
         }
 
-        public static void WaitUntilAllElementsVisible(IWebDriver driver, By by, int seconds)
+        public static void WaitUntilAllElementsVisible(By by)
         {
-            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            var driver = DriverSingltone.InizializeWebDriver();
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
             try
             {
                 wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(by));

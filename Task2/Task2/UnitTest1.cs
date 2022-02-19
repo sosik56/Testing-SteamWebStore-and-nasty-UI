@@ -2,19 +2,16 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Task2.ForData;
+using Task2.Models;
 using Task2.Pages_Object;
+using Task2.Utility;
 
 namespace Task2
-{
+{    
     public class Tests
-    {       
-        private string _configJsonName = @"..\\..\\..\\Resourses\configJSON.json";
-        private string _dataJsonName = @"..\\..\\..\\Resourses\data.json";       
-        private string _pathToDataAdvancedSearch = @"..\\..\\..\\Resourses\jsonForAdvancedSearch.json";
-        private ConfigClass _configData;
+    {      
         private DataClass _dataTestCase2;
         private MarketAdvencedSearch _dataAdvancedSearch;
-
         private IWebDriver _driver;
 
         private GlobalHeaderPageObject _globalHeaderPage = new GlobalHeaderPageObject();
@@ -25,93 +22,86 @@ namespace Task2
         private GamePageObject _gamePageObject = new GamePageObject();
         private CommunityMarketPageObject _communityMarketPO = new CommunityMarketPageObject();
         private AdvancedSearchFormPO _advancedSearchFormPO = new AdvancedSearchFormPO();
-        private ItemPageObject _itemPageObject = new ItemPageObject();
-
-        private List<string> _onSearchingResualt;
-        private List<string> _onHisPage;
+        private ItemPageObject _itemPageObject = new ItemPageObject();              
 
         [OneTimeSetUp]
         public void InizializeData()
         {
-            _configData = SerializeJson.DeSerializationDataFromFile<ConfigClass>(_configJsonName);
-            _dataTestCase2 = SerializeJson.DeSerializationDataFromFile<DataClass>(_dataJsonName);
-            _dataAdvancedSearch = SerializeJson.DeSerializationDataFromFile<MarketAdvencedSearch>(_pathToDataAdvancedSearch);
+            _dataTestCase2 = UtilityClass.DataTestCase2;
+            _dataAdvancedSearch = UtilityClass.DataAdvancedSearch;
         }
 
         [SetUp]
         public void Setup()
         {             
-            _driver = driverSingltone.InizializeWebDriver(_configData.BrowserType, _configData.Arguments);            
-            _driver.Navigate().GoToUrl(_configData.Host);           
+            _driver = DriverSingltone.InizializeWebDriver();            
+            _driver.Navigate().GoToUrl(UtilityClass.ConfigData.Host);           
         }
 
         [TearDown]
         public void End()
         {
-            driverSingltone.EndAndNull();
+            DriverSingltone.EndAndNull();
             _driver = null;
         }
 
         [Test]
         public void Test1()
         {
-            Assert.True(_mainPageObject.IsPageOpen(_driver),"Not main page");
-
-            _globalHeaderPage.ClickAboutButton(_driver);
-            Assert.True(_aboutPageObject.IsPageOpen(_driver,_configData.WaitingTime), "Not about page");
-            Assert.True(_aboutPageObject.IsGamersOnlineMoreInGame(_driver), "Compair was failed");
-
-            _globalHeaderPage.ClickStoreButton(_driver);
-            Assert.True(_mainPageObject.IsPageOpen(_driver), "Not main page");
+            Assert.True(_mainPageObject.IsPageOpen(),"Not main page");
+            _globalHeaderPage.ClickAboutButton();
+            Assert.True(_aboutPageObject.IsPageOpen(), "Not about page");
+            Assert.True(_aboutPageObject.IsGamersOnlineMoreInGame(), "Compair was failed");
+            _globalHeaderPage.ClickStoreButton();
+            Assert.True(_mainPageObject.IsPageOpen(), "Not main page");
         }
 
         [Test]
         public void Test2()
         {
-            Assert.True(_mainPageObject.IsPageOpen(_driver), "Not main page");
-            _storeNavigationPO.PopupMenuTopSellersClick(_driver,2);
-            Assert.True(_topSellersPO.IsPageOpen(_driver), "Not topsseler page");
+            Assert.True(_mainPageObject.IsPageOpen(), "Not main page");
+            _storeNavigationPO.PopupMenuTopSellersClick();
+            Assert.True(_topSellersPO.IsPageOpen(), "Not topsseler page");
             foreach (var item in _dataTestCase2.CheckBoxCategoryAndValue)
             {
                 var expectedCheckedBox = item.Value.Count;
-                int actual = _topSellersPO.CheckBoxs(_driver, item.Key, item.Value, _configData.WaitingTime);
+                int actual = _topSellersPO.CheckBoxs(item.Key, item.Value);
                 Assert.AreEqual(expectedCheckedBox, actual, "Checkin box was failed");
             }
             
-           Assert.True(_topSellersPO.IsGameOnPageAreEqualWithTopNumber(_driver,_configData.WaitingTime), 
+           Assert.True(_topSellersPO.IsGameOnPageAreEqualWithTopNumber(), 
                "Not equal amount ref games and top number");
 
-            _onSearchingResualt = _topSellersPO.GetFirstResualtNamePriceRealese(_driver);
-            _topSellersPO.ClickFirstResault(_driver);
-            _onHisPage= _gamePageObject.GetNamePriceRealese(_driver);
-            for (int i = 0; i < _onSearchingResualt.Count; i++)
-            {
-                Assert.AreEqual(_onSearchingResualt[i], _onHisPage[i], "Note Equals Data");
-            }
+            GameModel _onSearchingResualt = _topSellersPO.GetFirstResualtNamePriceRealese();
+            _topSellersPO.ClickFirstResault();
+            GameModel _onHisPage= _gamePageObject.GetNamePriceRealese();
+            Assert.AreEqual(_onSearchingResualt.Name, _onHisPage.Name, "Note Equals Data");
+            Assert.AreEqual(_onSearchingResualt.Price, _onHisPage.Price, "Note Equals Data");
+            Assert.AreEqual(_onSearchingResualt.ReleaseDate, _onHisPage.ReleaseDate, "Note Equals Data");            
         }
 
         [Test]
         public void Test3()
         {
-            Assert.True(_mainPageObject.IsPageOpen(_driver), "Not main page");
-            _globalHeaderPage.PoupMenuCommunityMarketClick(_driver, _configData.WaitingTime);
-            Assert.True(_communityMarketPO.IsPageOpen(_driver, _configData.WaitingTime),"Not Market Page");
-            _communityMarketPO.ClickShowAdvancedMarket(_driver, _configData.WaitingTime);
-            Assert.True(_advancedSearchFormPO.IsAdvancedSearchFormVisibale(_driver, _configData.WaitingTime),"Not visibale SearchForm");
-            _advancedSearchFormPO.EnterAdvancedSearchData(_dataAdvancedSearch, _driver, _configData.WaitingTime);           
-            Assert.True(_communityMarketPO.AreFiltersHere(_driver, _dataAdvancedSearch),"Not all filters was finded");
-            Assert.True(_communityMarketPO.AreFirstFiveResultsContaisGolden(_driver, _configData.WaitingTime),"First 5 results not contains Golden");
-            int amoutOfResults = _communityMarketPO.ReturnAmountOfResualts(_driver);
-            _communityMarketPO.RemoveGoldenAndDotaFilters(_driver, _dataAdvancedSearch.InputForSearchField, _dataAdvancedSearch.GameName);
-            Assert.AreNotEqual(amoutOfResults, _communityMarketPO.ReturnAmountOfResualts(_driver),"amount of resualt the same");
-            string firstResualtName = _communityMarketPO.GetFirstResualtName(_driver, _configData.WaitingTime);
-            _communityMarketPO.ClickFirstResult(_driver);
+            Assert.True(_mainPageObject.IsPageOpen(), "Not main page");
+            _globalHeaderPage.PoupMenuCommunityMarketClick();
+            Assert.True(_communityMarketPO.IsPageOpen(),"Not Market Page");
+            _communityMarketPO.ClickShowAdvancedMarket();
+            Assert.True(_advancedSearchFormPO.IsAdvancedSearchFormVisibale(),"Not visibale SearchForm");
+            _advancedSearchFormPO.EnterAdvancedSearchData(_dataAdvancedSearch);           
+            Assert.True(_communityMarketPO.AreFiltersHere(_dataAdvancedSearch),"Not all filters was finded");
+            Assert.True(_communityMarketPO.AreFirstFiveResultsContaisGolden(),"First 5 results not contains Golden");
+            int amoutOfResults = _communityMarketPO.ReturnAmountOfResualts();
+            _communityMarketPO.RemoveGoldenAndDotaFilters(_dataAdvancedSearch.InputForSearchField, _dataAdvancedSearch.GameName);
+            Assert.AreNotEqual(amoutOfResults, _communityMarketPO.ReturnAmountOfResualts(),"amount of resualt the same");
+            string firstResualtName = _communityMarketPO.GetFirstResualtName();
+            _communityMarketPO.ClickFirstResult();
             Assert.AreEqual(firstResualtName,
-                _itemPageObject.GetItemName(_driver, _configData.WaitingTime),"Name not the same");
+                _itemPageObject.GetItemName(),"Name not the same");
 
-            Assert.True(_itemPageObject.IsTypeOfItem(_driver, _configData.WaitingTime, _dataAdvancedSearch.RareCheckBoxes[0]),
+            Assert.True(_itemPageObject.IsTypeOfItem(_dataAdvancedSearch.RareCheckBoxes[0]),
                 "Item type's is not Immortal => filter not work");
-            Assert.True(_itemPageObject.IsItemForWhom(_driver, _configData.WaitingTime, _dataAdvancedSearch.HeroName),
+            Assert.True(_itemPageObject.IsItemForWhom(_dataAdvancedSearch.HeroName),
                 "Item is not for Lifestealer => filter not work");           
         }
         

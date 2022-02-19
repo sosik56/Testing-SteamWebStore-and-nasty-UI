@@ -5,9 +5,10 @@ namespace Task2.Pages_Object
     public class MainPageObject
     {
         private By _mainPageLocator = By.XPath("//div[contains(@class,'home_page')]");        
-      
-        public bool IsPageOpen(IWebDriver driver)
+
+        public bool IsPageOpen()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             return driver.FindElements(_mainPageLocator).Count > 0;
         }        
 

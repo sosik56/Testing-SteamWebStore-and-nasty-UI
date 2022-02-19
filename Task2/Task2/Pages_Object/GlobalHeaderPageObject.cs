@@ -9,28 +9,29 @@ namespace Task2.Pages_Object
         private By _storeButtone = By.XPath("//div[@class='supernav_container']//a[contains(@data-tooltip-content,'store')]");
         private By _communityButton = By.XPath("//div[@id='global_header']//a[contains(@data-tooltip-content,'community')]");
 
-        private By _poupMenyMarket = By.XPath("//div[@id='global_header']//a[contains(@href,'market')]");        
+        private By _poupMenyMarket = By.XPath("//div[@id='global_header']//a[contains(@href,'market')]");
 
-        public void ClickAboutButton(IWebDriver driver)
+        public void ClickAboutButton()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             driver.FindElement(_aboutButton).Click();
         }
         
-        public void ClickStoreButton(IWebDriver driver)
+        public void ClickStoreButton()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             driver.FindElement(_storeButtone).Click();
         } 
 
-        public void PoupMenuCommunityMarketClick(IWebDriver driver, int waitSec)
+        public void PoupMenuCommunityMarketClick()
         {
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
             IWebElement newTab = driver.FindElement(_communityButton);
             Actions action = new Actions(driver);
             action.MoveToElement(newTab);
             action.Perform();
-            Expectations.WaitUntilVisible(driver, _poupMenyMarket, waitSec);
+            Expectations.WaitUntilVisible(_poupMenyMarket);
             driver.FindElement(_poupMenyMarket).Click();
-        }
-        
-
+        } 
     }
 }

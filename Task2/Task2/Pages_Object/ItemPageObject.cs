@@ -11,19 +11,24 @@ namespace Task2.Pages_Object
         private By HeroNameLocator(string heroName) =>
             By.XPath($"//div[contains(@id,'item_descriptors')]/div[text()[contains(.,'{heroName}')]]");
 
-        public string GetItemName(IWebDriver driver, int waitSec)
+        public string GetItemName()
         {
-            Expectations.WaitUntilVisible(driver, itemName, waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(itemName);
             return driver.FindElement(itemName).Text;
         }
-        public bool IsTypeOfItem(IWebDriver driver, int waitSec, string nameRare)
+
+        public bool IsTypeOfItem(string nameRare)
         {
-            Expectations.WaitUntilVisible(driver, RareLocator(nameRare), waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(RareLocator(nameRare));
             return driver.FindElements(RareLocator(nameRare)).Count == 1;
         }
-        public bool IsItemForWhom(IWebDriver driver, int waitSec, string heroName)
+
+        public bool IsItemForWhom(string heroName)
         {
-            Expectations.WaitUntilVisible(driver, HeroNameLocator(heroName), waitSec);
+            IWebDriver driver = DriverSingltone.InizializeWebDriver();
+            Expectations.WaitUntilVisible(HeroNameLocator(heroName));
             return driver.FindElements(HeroNameLocator(heroName)).Count == 1;
         }
     }

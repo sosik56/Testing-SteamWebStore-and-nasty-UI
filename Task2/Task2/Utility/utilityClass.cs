@@ -6,7 +6,16 @@ using Task2.ForData;
 namespace Task2.Utility
 {
     public static class UtilityClass
-    {
+    {       
+        private static string  _configPath = "Task2.Resourses.configJSON.json";
+        private static string _dataCase2 = "Task2.Resourses.data.json";
+        private static string _advancedSearchData = "Task2.Resourses.jsonForAdvancedSearch.json";
+
+        public static ConfigClass ConfigData = SerializeJson.DeSerializationDataFromFileReflection<ConfigClass>(_configPath);
+        public static DataClass DataTestCase2 = SerializeJson.DeSerializationDataFromFileReflection<DataClass>(_dataCase2);
+        public static MarketAdvencedSearch DataAdvancedSearch =
+            SerializeJson.DeSerializationDataFromFileReflection<MarketAdvencedSearch>(_advancedSearchData);
+
         public static int GetRidOfLettersAndSymbols(string str)
         {
             string pattern = @"\D";
