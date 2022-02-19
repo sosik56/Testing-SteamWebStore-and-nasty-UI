@@ -1,0 +1,9 @@
+{
+    "BrowserType": "Chrome",
+    "Host": "https://demoqa.com/",
+    "Arguments": [
+        "--incognito",
+        "--start-maximized"
+    ],
+    "WaitingTime": 5
+}
