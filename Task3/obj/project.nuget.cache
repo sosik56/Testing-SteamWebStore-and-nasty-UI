@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GGJGtMWoZB+mZ+K2b7SeSE31AclDNZz43gdJV/et8qyYLqWreh79i2ZEcnvdQbNMkikEB4NcJtxR8Gc7rRgw4A==",
+  "dgSpecHash": "E/88eMRHkXddF6WtvoXfGmI9VNfC9OMxBrGXGTaY2scplezi1WNd70O25XFJ4XVoAZgW6bgXbJc4TseWCLE/Xw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\source\\repos\\Task3\\Task3\\Task3.csproj",
+  "projectFilePath": "C:\\Users\\User\\Desktop\\work\\GitHub\\aa\\Task3\\Task3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\anglesharp\\0.16.1\\anglesharp.0.16.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
