@@ -16,13 +16,13 @@ namespace Task3.Utility
         public static T DeSerializeFileReflection<T>(string path)
         {
             string text;
-            var assembly = typeof(Task3.Tests).GetTypeInfo().Assembly;
+            var assembly = typeof(Tests).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(path);
-            using (var reader = new System.IO.StreamReader(stream))
-            {
+            using (var reader = new StreamReader(stream))
+            {                
                 text = reader.ReadToEnd();
             }
             return JsonSerializer.Deserialize<T>(text);
-        }
+        }        
     }
 }

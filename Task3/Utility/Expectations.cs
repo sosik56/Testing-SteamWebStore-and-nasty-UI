@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-
 namespace Task3.Utility
 {
     public static class Expectations
@@ -15,7 +14,7 @@ namespace Task3.Utility
             IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
             try
             {
-                wait.Until(ExpectedConditions.ElementIsVisible(by));
+                wait.Until(ExpectedConditions.ElementIsVisible(by));               
             }
             catch
             {
@@ -51,6 +50,21 @@ namespace Task3.Utility
             catch
             {
                 Console.WriteLine($"{by} not visibale");
+            }
+        }
+
+        public static void WaintUntilAlert()
+        {
+            var driver = DriverSinglton.InizializeWebDriver();
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
+            try
+            {
+                wait.Until(ExpectedConditions.AlertIsPresent());
+
+            }
+            catch
+            {
+                Console.WriteLine($"Alert not visibale");                
             }
         }
 

@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <None Remove="Resourses\configJSON.json" />
+    <None Remove="Resourses\UsersData.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resourses\configJSON.json" />
+    <EmbeddedResource Include="Resourses\UsersData.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,12 +26,6 @@
     <PackageReference Include="Selenium.Support" Version="3.11.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.11.0" />
     <PackageReference Include="WebDriverManager" Version="2.12.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PageObjects\" />
-    <Folder Include="Elements\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
