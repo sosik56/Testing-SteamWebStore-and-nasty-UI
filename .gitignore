@@ -615,3 +615,9 @@ testlog.manifest
 .vs/Task3/DesignTimeBuild/.dtbcache.v2
 .vs/Task3/v16/.suo
 .vs/Task3/v16/TestStore/0/testlog.manifest
+Task3/obj/Task3.csproj.nuget.dgspec.json
+Task3/obj/Debug/net5.0/Task3.assets.cache
+Task3/obj/Debug/net5.0/Task3.GeneratedMSBuildEditorConfig.editorconfig
+Task3/obj/project.assets.json
+Task3/obj/project.nuget.cache
+Task3/obj/Task3.csproj.nuget.dgspec.json
