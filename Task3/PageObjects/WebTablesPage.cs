@@ -19,7 +19,7 @@ namespace Task3.PageObjects
                 $"/following-sibling::div[@role='gridcell' and text()='{user.Department}']" +
                 $"/following-sibling::div[@role='gridcell']//span[contains(@id,'delete')]");
 
-        public WebTablesPage(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public WebTablesPage() : base(new Button(By.XPath("//button[@id='addNewRecordButton']"), "Add Button"),"WebTable Page") { }
 
         public void ClickAddButton()
         {
@@ -28,12 +28,7 @@ namespace Task3.PageObjects
 
         public bool IsUserInTable(User user)
         {
-             if(new Button(LocatorForDeletTheUserButton(user), "User Delet Button").GetElements() == 1)
-             {
-                return true;
-             }
-            return false;
-
+            return new Button(LocatorForDeletTheUserButton(user), "User Delet Button").GetElements() == 1;           
         }
         public void DeletTheUser(User user)
         {

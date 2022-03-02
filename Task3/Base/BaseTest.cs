@@ -3,7 +3,7 @@ using Task3.Utility;
 
 namespace Task3.Base
 {
-    abstract public class  BaseTest
+    public abstract class  BaseTest
     {
         [SetUp]
         public void Setup()

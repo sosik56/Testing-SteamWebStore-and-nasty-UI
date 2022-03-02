@@ -16,7 +16,7 @@ namespace Task3.PageObjects
         private TextField _salaryField = new TextField(By.XPath("//input[@id='salary']"), "Salary Field");
         private TextField _departmentField = new TextField(By.XPath("//input[@id='department']"), "Department Field");
 
-        public RegistrationForm(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public RegistrationForm() : base(new TextField(By.XPath("//input[@id='userEmail']"), "Email Field"),"Registration Form") { }
 
         public void ClickSubmitButton()
         {

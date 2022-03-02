@@ -13,7 +13,7 @@ namespace Task3.PageObjects
         private Text _confirmSpan = new Text(By.XPath("//span[@id='confirmResult']"), "Confirm Span");
         private Text _promptSpan = new Text(By.XPath("//span[@id='promptResult']"), "Prompt Span");
 
-        public AlertsPage(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public AlertsPage() : base(new Button(By.XPath("//button[@id='alertButton']"), "Standart Alert Button"), "Alert Page") { }
 
         public void ClickStandartAlertButton()
         {

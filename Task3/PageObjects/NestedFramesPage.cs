@@ -6,10 +6,11 @@ namespace Task3.PageObjects
 {
     public class NestedFramesPage:BaseForm
     {
-        private WebContent _parentFrameBody = new WebContent(By.XPath("//body"), "Perent Frame Body");
-        private WebContent _childFrameParagraph = new WebContent(By.XPath("//body//p"), "Perent Frame Body");
+        private Frame _parentFrameBody = new Frame(By.XPath("//body"), "Perent Frame Body");
+        private Frame _childFrameParagraph = new Frame(By.XPath("//body//p"), "Perent Frame Body");
 
-        public NestedFramesPage(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public NestedFramesPage() : base(new Text(By.XPath("//div[@class='main-header' and text()='Nested Frames']"),
+            "Header Nested Frame Page"), "Nested Frame Page") { }
 
         public string GetTextFromParentFrame()
         {

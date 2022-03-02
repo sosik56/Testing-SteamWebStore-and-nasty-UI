@@ -7,6 +7,7 @@ namespace Task3.Utility
         {
             DriverSinglton.InizializeWebDriver().SwitchTo().Frame(IDOrName);
         }
+
         public static void SwitchToNextCHildFrame()
         {
             DriverSinglton.InizializeWebDriver().SwitchTo().Frame(0);

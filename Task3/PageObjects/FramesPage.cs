@@ -6,9 +6,9 @@ namespace Task3.PageObjects
 {
     public class FramesPage:BaseForm
     {
-        private WebContent _frameHeader = new WebContent(By.XPath("//h1[@id='sampleHeading']"), "Frame Header");
+        private Text _frameHeader = new Text(By.XPath("//h1[@id='sampleHeading']"), "Frame Header");
         
-        public FramesPage(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public FramesPage() : base(new Text(By.XPath("//div[@class='main-header' and text()='Frames']"), "Frame Header"),"Frame Page") { }
 
         public string GetTextFromFrameHeader()
         {

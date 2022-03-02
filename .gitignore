@@ -409,6 +409,7 @@ ehthumbs_vista.db
 # Dump file
 *.stackdump
 
+
 # Folder config file
 [Dd]esktop.ini
 
@@ -601,4 +602,16 @@ $RECYCLE.BIN/
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+dtbcache.v2
+suo
+testlog.manifest
+.vs/Task3/DesignTimeBuild/.dtbcache.v2
+.vs/Task3/v16/.suo
+.vs/Task3/v16/TestStore/0/testlog.manifest
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudio,csharp
+.vs/Task3/DesignTimeBuild/.dtbcache.v2
+.vs/Task3/DesignTimeBuild/.dtbcache.v2
+.vs/Task3/DesignTimeBuild/.dtbcache.v2
+.vs/Task3/v16/.suo
+.vs/Task3/v16/TestStore/0/testlog.manifest

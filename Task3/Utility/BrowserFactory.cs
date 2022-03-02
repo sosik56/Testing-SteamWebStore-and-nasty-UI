@@ -25,7 +25,7 @@ namespace Task3.Utility
             catch (Exception)
             {
                 Console.WriteLine("No apropriate data");
-                browserType = BrowserTypes.chrome;
+                throw new Exception("No apropriate data");
             }            
 
             switch (browserType)
@@ -33,6 +33,7 @@ namespace Task3.Utility
                 case BrowserTypes.chrome:
                     new DriverManager().SetUpDriver(new ChromeConfig());
                     var option = new ChromeOptions();
+                    option.AddUserProfilePreference("download.default_directory", AppDomain.CurrentDomain.BaseDirectory);
                     option.PageLoadStrategy = PageLoadStrategy.Normal;
                     foreach (var item in arguments)
                     {
@@ -44,6 +45,10 @@ namespace Task3.Utility
                 case BrowserTypes.firefox:
                     new DriverManager().SetUpDriver(new FirefoxConfig());
                     var optionFF = new FirefoxOptions();
+                    optionFF.SetPreference("browser.download.folderList",2); //2 means download to specify folder
+                    optionFF.SetPreference("browser.download.dir", AppDomain.CurrentDomain.BaseDirectory);
+                    optionFF.SetPreference("browser.helperApps.neverAsk.saveToDisk", "image/jpeg, image/png");
+
                     optionFF.PageLoadStrategy = PageLoadStrategy.Normal;
                     foreach (var item in arguments)
                     {

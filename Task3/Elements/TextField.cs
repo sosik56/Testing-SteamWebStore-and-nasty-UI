@@ -11,7 +11,7 @@ namespace Task3.Elements
         public void SendText(string text)
         {
             LogUtils.MakeSystemLog($"Send to {_name} the text: {text}");
-            Expectations.WaitUntilVisible(_Xpath);
+            Expectations.WaitUntilVisible(_locator);
             GetElement().SendKeys(text);
         }
     }

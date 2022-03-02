@@ -8,8 +8,9 @@ namespace Task3.PageObjects
     {
         private Button _alertFrameButton = new Button(By.XPath("//div[@class='card-body']/h5[text()[contains(.,'Alerts, Frame')]]"), "Alerts&Frame Button");
         private Button _elementsButton = new Button(By.XPath("//div[@class='card-body']/h5[text()[contains(.,'Elements')]]"), "Alerts&Frame Button");
+        private Button _widgetsButton = new Button(By.XPath("//div[@class='card-body']/h5[text()[contains(.,'Widgets')]]"), "Widgets Button");        
 
-        public MainPage(BaseElement elem, string namePage) : base(elem, namePage) { }
+        public MainPage() : base(new Button(By.XPath("//div[@class='card-body']/h5[text()[contains(.,'Widgets')]]"), "Widgets Button"),"Main Page") { }
 
         public void ClickAlertFrameButton()
         {
@@ -19,6 +20,11 @@ namespace Task3.PageObjects
         public void ClickElementsButton()
         {
             _elementsButton.Click();
+        }
+
+        public void ClickWidgetsButton()
+        {
+            _widgetsButton.Click();
         }
     }
 }

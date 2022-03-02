@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -20,6 +21,20 @@ namespace Task3.Utility
             {
                 Console.WriteLine($"{by} not visibale");
                 wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            }
+        }
+
+        public static void WaitUntilDownload(string pathToFile)
+        {
+            var driver = DriverSinglton.InizializeWebDriver();
+            IWait<IWebDriver> wait = new WebDriverWait(driver, TimeSpan.FromSeconds(waitSec));
+            try
+            {
+                wait.Until(x =>File.Exists(pathToFile)==true);                
+            }
+            catch
+            {
+                Console.WriteLine($"File not exsists");                
             }
         }
 

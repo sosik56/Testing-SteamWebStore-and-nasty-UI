@@ -17,7 +17,7 @@ namespace Task3.Utility
         {
             string text;
             var assembly = typeof(Tests).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path);
+            var stream = assembly.GetManifestResourceStream(path);           
             using (var reader = new StreamReader(stream))
             {                
                 text = reader.ReadToEnd();

@@ -6,6 +6,11 @@ using Task3.Elements;
 using Task3.Models;
 using Task3.PageObjects;
 using Task3.Utility;
+using System;
+using System.Globalization;
+using System.Threading;
+using System.IO;
+
 
 namespace Task3
 {
@@ -22,10 +27,10 @@ namespace Task3
         [Test]
         public void Test1()
         {
-            MainPage mainPage = new MainPage(new WebContent(By.XPath("//div[@class ='home-content']"), "MainPage Content"), "Main Page");
-            LeftPanel leftPanel = new LeftPanel(new WebContent(By.XPath("//div[@class ='left-pannel']"), "Left Panel Content"), "Left Panel");
-            AlertsPage alertsPage = new AlertsPage(new WebContent(By.XPath("//div[contains(@id,'javascriptAlerts')]"), "Alerts Form"), "Alerts Page");
-
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            AlertsPage alertsPage = new AlertsPage();
+           
             LogUtils.MakeSystemLog("STEP 1");
             Assert.IsTrue(mainPage.IsPageOpen(), "Page is not open");
 
@@ -54,21 +59,19 @@ namespace Task3
             LogUtils.MakeSystemLog("STEP 7");
             alertsPage.ClickPromtButton();
             Assert.AreEqual("Please enter your name", AlertUtility.GetTextFromAlert(), "Sentences are not equal");
-
+            
             LogUtils.MakeSystemLog("STEP 8");
-            Assert.AreEqual($"You entered {AlertUtility.SendRandomStr()}", alertsPage.GetPromptSpanText());
+            Assert.AreEqual($"You entered {AlertUtility.SendStrToAlert(UtilityClass.GetRandomGuid())}", alertsPage.GetPromptSpanText());
             Assert.IsFalse(AlertUtility.IsThereAlert(), "There is ALERT");
         }
 
         [Test]
         public void Test2()
         {
-            MainPage mainPage = new MainPage(new WebContent(By.XPath("//div[@class ='home-content']"), "MainPage Content"), "Main Page");
-            LeftPanel leftPanel = new LeftPanel(new WebContent(By.XPath("//div[@class ='left-pannel']"), "Left Panel Content"), "Left Panel");
-            NestedFramesPage nestedFramesPage = new NestedFramesPage(new WebContent(By.XPath("//div[@class='main-header' and text()='Nested Frames']")
-                , "Header Nested Frame Page"), "Nested Frame Page");
-            FramesPage framesPage = new FramesPage(new WebContent(By.XPath("//div[@class='main-header' and text()='Frames']"), "Header Frame Page"), "Frame Page");
-
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            NestedFramesPage nestedFramesPage = new NestedFramesPage();
+            FramesPage framesPage = new FramesPage();
 
             LogUtils.MakeSystemLog("STEP 1");
             Assert.IsTrue(mainPage.IsPageOpen(), "Page is not open");
@@ -100,10 +103,10 @@ namespace Task3
         [TestCaseSource("GetUserByIndx")]
         public void Test3(User user)
         {           
-            MainPage mainPage = new MainPage(new WebContent(By.XPath("//div[@class ='home-content']"), "MainPage Content"), "Main Page");
-            LeftPanel leftPanel = new LeftPanel(new WebContent(By.XPath("//div[@class ='left-pannel']"), "Left Panel Content"), "Left Panel");
-            WebTablesPage webTables = new WebTablesPage(new WebContent(By.XPath("//div[@class='web-tables-wrapper']"), "Web Tables Content"), "Web Tables");
-            RegistrationForm registrationForm = new RegistrationForm(new WebContent(By.XPath("//form[@id='userForm']"), "Registration Form Content"), "Registration Form");
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            WebTablesPage webTables = new WebTablesPage();
+            RegistrationForm registrationForm = new RegistrationForm();
 
             LogUtils.MakeSystemLog("STEP 1");
             Assert.IsTrue(mainPage.IsPageOpen(), "Page is not open");
@@ -133,12 +136,11 @@ namespace Task3
         [Test]
         public void Test4()
         {
-            MainPage mainPage = new MainPage(new WebContent(By.XPath("//div[@class ='home-content']"), "MainPage Content"), "Main Page");
-            LeftPanel leftPanel = new LeftPanel(new WebContent(By.XPath("//div[@class ='left-pannel']"), "Left Panel Content"), "Left Panel");
-            BrowserWindowsForm browserWindowsForm = new BrowserWindowsForm(new WebContent(By.XPath("//div[@id='browserWindows']")
-                ,"Browser Windows Content"), "Browser Windows Page");
-            SamplePage samplePage = new SamplePage(new Text(By.XPath("//h1[@id='sampleHeading']"),"Sample Page Text"),"Sample Page");
-            LinksPage linksPage = new LinksPage(new WebContent(By.XPath("//div[@id='linkWrapper']"), "Links Forms"), "Links Page");
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            BrowserWindowsForm browserWindowsForm = new BrowserWindowsForm();
+            SamplePage samplePage = new SamplePage();
+            LinksPage linksPage = new LinksPage();
                        
             LogUtils.MakeSystemLog("STEP 1");            
             Assert.IsTrue(mainPage.IsPageOpen(), "Main Page is not open");
@@ -179,6 +181,92 @@ namespace Task3
             LogUtils.MakeSystemLog("STEP 7");
             DriverSinglton.SwitchToTheTabByIndx(0);
             Assert.IsTrue(linksPage.IsPageOpen(), "Browser Windows page is not open");            
+        }
+
+        [Test]
+        public void Test5()
+        {
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            ProgressBarForm progressBar = new ProgressBarForm();
+            SliderForm sliderForm = new SliderForm();
+
+            LogUtils.MakeSystemLog("STEP 1");
+            Assert.IsTrue(mainPage.IsPageOpen(), "Main Page is not open");
+
+            LogUtils.MakeSystemLog("STEP 2");
+            mainPage.ClickWidgetsButton();
+            leftPanel.ClickSliderButton();
+            Assert.IsTrue(sliderForm.IsPageOpen(), "Slider Form is not open");
+
+            LogUtils.MakeSystemLog("STEP 3");            
+            sliderForm.MoveSliderByX(-2000);
+            int rndInt = UtilityClass.GetRandomInt(0, 100);
+            sliderForm.SetSliderValue(rndInt);
+            Assert.IsTrue(rndInt.ToString() == sliderForm.GetSliderValue());
+
+            LogUtils.MakeSystemLog("STEP 4");
+            leftPanel.ClickProgressBar();
+            Assert.IsTrue(progressBar.IsPageOpen(), "ProgressBar Form is not open");
+
+            LogUtils.MakeSystemLog("STEP 5");
+            progressBar.ClickStartAndStopWhenValueApeears(Convert.ToInt32(UtilityClass.ReturnValue(UtilityClass.data, "age")));
+            Assert.AreEqual(UtilityClass.ReturnValue(UtilityClass.data, "age"), progressBar.GetProgressBarValue());            
+        }
+
+        [Test]
+        public void Test6()
+        {
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            DatePickerPage datePickerPage = new DatePickerPage();
+
+            LogUtils.MakeSystemLog("STEP 1");
+            Assert.IsTrue(mainPage.IsPageOpen(), "Main Page is not open");
+
+            LogUtils.MakeSystemLog("STEP 2");
+            mainPage.ClickWidgetsButton();
+            leftPanel.ClickDatePickerButton();
+            Assert.IsTrue(datePickerPage.IsPageOpen(), "DatePicker page is not open");
+            var culture = new CultureInfo("en-US");           
+            string date = UtilityClass.GetDateTimeNow().ToString("MM/dd/yyyy",culture);
+            string dateWithTime = UtilityClass.GetDateTimeNow().ToString("MMMM d, yyyy h:mm tt",culture);
+            Assert.AreEqual(date, datePickerPage.GetSelectDateFieldValue(), "Select Date Field has diffirent value");
+            Assert.AreEqual(dateWithTime, datePickerPage.GetDateAndTimeFieldValue(), "Date And Time Field has diffirent value");
+
+            LogUtils.MakeSystemLog("STEP 3");           
+            datePickerPage.ClickSelectDateField();
+            datePickerPage.PickDateUsingWindow(DateTime.Parse(UtilityClass.ReturnValue(UtilityClass.data, "febrary")));
+            DateTime data =  DateTime.Parse(UtilityClass.ReturnValue(UtilityClass.data, "febrary"));
+            string appropriateView = data.ToString("MM/dd/yyyy",culture);
+            Assert.AreEqual(appropriateView, datePickerPage.GetSelectDateFieldValue(), "Select Date Field has diffirent value");
+        }
+
+        [Test]
+        public void Test7()
+        {
+            MainPage mainPage = new MainPage();
+            LeftPanel leftPanel = new LeftPanel();
+            UploadAndDownloadPage uploadAndDownload = new UploadAndDownloadPage();
+            string temp = AppDomain.CurrentDomain.BaseDirectory;
+
+            LogUtils.MakeSystemLog("STEP 1");
+            Assert.IsTrue(mainPage.IsPageOpen(), "Main Page is not open");
+
+            LogUtils.MakeSystemLog("STEP 2");
+            mainPage.ClickElementsButton();
+            leftPanel.ClickUploadAndDownload();
+            Assert.IsTrue(uploadAndDownload.IsPageOpen(), "Upload and Download page is not open");
+
+            LogUtils.MakeSystemLog("STEP 3");
+            uploadAndDownload.ClickDownloadButton();           
+            FileInfo fileInfo = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,uploadAndDownload.GetDownloadAttFromButton()));
+            Assert.AreEqual(uploadAndDownload.GetDownloadAttFromButton(), fileInfo.Name, "Not equal names");
+
+            LogUtils.MakeSystemLog("STEP 4");
+            uploadAndDownload.SendUpload(fileInfo.FullName);
+            Assert.IsTrue(uploadAndDownload.GetUploadFilePatheText().Contains(fileInfo.Name));
+            UtilityClass.DeletFile(fileInfo.FullName);
         }
     }
 }

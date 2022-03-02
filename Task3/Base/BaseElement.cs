@@ -4,37 +4,37 @@ using Task3.Utility;
 
 namespace Task3.Base
 {
-    abstract public class BaseElement
+    public abstract class BaseElement
     {
-        protected By _Xpath;
+        protected By _locator;
         protected string _name;
 
-        public BaseElement(By xpath, string nameElem)
+        protected BaseElement(By locator, string nameElem)
         {
-            _Xpath = xpath;
+            _locator = locator;
             _name = nameElem;
         }
 
-        public IWebElement GetElement()
+        protected IWebElement GetElement()
         {            
-            Expectations.WaitUntilVisible(_Xpath);            
-            return DriverSinglton.InizializeWebDriver().FindElement(_Xpath);
+            Expectations.WaitUntilVisible(_locator);            
+            return DriverSinglton.InizializeWebDriver().FindElement(_locator);
         }
 
         public int GetElements()
         {
-            Expectations.WaitUntilVisible(_Xpath);
-            return DriverSinglton.InizializeWebDriver().FindElements(_Xpath).Count;
+            Expectations.WaitUntilVisible(_locator);
+            return DriverSinglton.InizializeWebDriver().FindElements(_locator).Count;
         }
-        
+
         public string GetAtribute(string nameAtt)
-        {
+        {           
             return GetElement().GetAttribute(nameAtt);
         }
 
         public bool IsVisible()
         {
-           return GetElement().Displayed;
+            return GetElement().FindElements(_locator).Count > 0;
         }
 
         public string GetText()
@@ -44,15 +44,15 @@ namespace Task3.Base
 
         public void MoveToElement()
         {
-            Actions action = new Actions(DriverSinglton.InizializeWebDriver());
-            action.MoveToElement(GetElement());
+            Actions action = new Actions(DriverSinglton.InizializeWebDriver());            
+            action.MoveToElement(GetElement());            
             action.Perform();
         }
 
         public void Click()
         {            
             LogUtils.MakeSystemLog($"{_name} was clicked");
-            Expectations.WaitUntilCkicable(_Xpath);
+            Expectations.WaitUntilCkicable(_locator);
             GetElement().Click();
         }        
     }

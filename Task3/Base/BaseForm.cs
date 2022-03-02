@@ -2,10 +2,11 @@
 
 namespace Task3.Base
 {
-    abstract public class BaseForm
+    public abstract class BaseForm
     {
-        private BaseElement _baseElement;
-        private string _namePage;
+        protected BaseElement _baseElement;
+        protected string _namePage;
+
         public BaseForm(BaseElement elem, string namePage)
         {
             _baseElement = elem;

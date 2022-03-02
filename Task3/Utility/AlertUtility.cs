@@ -22,13 +22,12 @@ namespace Task3.Utility
             DriverSinglton.InizializeWebDriver().SwitchTo().Alert().Dismiss();
         }
 
-        public static string SendRandomStr()
-        {
-            Guid g = Guid.NewGuid();
+        public static string SendStrToAlert(string str)
+        {            
             Expectations.WaintUntilAlert();
-            DriverSinglton.InizializeWebDriver().SwitchTo().Alert().SendKeys(g.ToString());
+            DriverSinglton.InizializeWebDriver().SwitchTo().Alert().SendKeys(str);
             AcceptAlert();
-            return g.ToString();
+            return str;
         }
         
         public static bool IsThereAlert()
