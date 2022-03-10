@@ -61,7 +61,10 @@ namespace Task3.Utility
         public static void DeletFile(string filePath)
         {
             if (File.Exists(filePath))
+            {
+                LogUtils.MakeSystemLog($"{filePath} was delited");
                 File.Delete(filePath);
+            }                
         }
     }
 }

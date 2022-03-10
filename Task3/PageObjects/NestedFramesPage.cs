@@ -6,8 +6,8 @@ namespace Task3.PageObjects
 {
     public class NestedFramesPage:BaseForm
     {
-        private Frame _parentFrameBody = new Frame(By.XPath("//body"), "Perent Frame Body");
-        private Frame _childFrameParagraph = new Frame(By.XPath("//body//p"), "Perent Frame Body");
+        private Text _parentFrameBody = new Text(By.XPath("//body"), "Perent Frame Text");
+        private Text _childFrameParagraph = new Text(By.XPath("//body//p"), "Child Frame Text");
 
         public NestedFramesPage() : base(new Text(By.XPath("//div[@class='main-header' and text()='Nested Frames']"),
             "Header Nested Frame Page"), "Nested Frame Page") { }

@@ -27,9 +27,11 @@ namespace Task3.PageObjects
             if(value>100 || value < 0)
             {
                 LogUtils.MakeSystemLog("Uncorrect value! Value must be from 0 to 100");
-            }            
+            }
 
-            while(_mainSlider.GetAtribute("value") != value.ToString())
+            LogUtils.MakeSystemLog($"Set slider value to {value}");
+
+            while (_mainSlider.GetAtribute("value") != value.ToString())
             {
                 MoveToRightByOneMS();
             }

@@ -7,13 +7,13 @@ namespace Task3.Elements
 {
     public class DropList : BaseElement
     {
-        public DropList(By xpath, string name) : base(xpath, name) { }
+        public DropList(By locator, string name) : base(locator, name) { }
 
         public void SelectElementByValue(int value)
         {
-            SelectElement selectElement = new SelectElement(DriverSinglton.InizializeWebDriver().FindElement(_locator));
-            selectElement.SelectByValue(value.ToString());
             LogUtils.MakeSystemLog($"{_name} was taken value = {value.ToString()}");
+            SelectElement selectElement = new SelectElement(GetElement());
+            selectElement.SelectByValue(value.ToString());            
         }       
     }
 }

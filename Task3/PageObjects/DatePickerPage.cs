@@ -10,15 +10,14 @@ namespace Task3.PageObjects
     {
         private TextField _selectDateField = new TextField(By.XPath("//input[@id='datePickerMonthYearInput']"), "Select date field");
         private TextField _dateAndTimeField = new TextField(By.XPath("//input[@id='dateAndTimePickerInput']"), "Date and Time field");
-        private Button _nextMonth = new Button(By.XPath("//button[contains(@class, 'next')]"),"Next month button");        
+        private Button _nextMonth = new Button(By.XPath("//button[contains(@class,'next')]"),"Next month button");        
 
-        private DropList _monthDropList = new DropList(By.XPath("//select[contains(@class, 'month-select')]"), "Month drop List");
-        private DropList _yearDropList = new DropList(By.XPath("//select[contains(@class, 'year-select')]"), "Year drop List");
-        private Text _currentMonthAndYear = new Text(By.XPath("//div[contains(@class, 'current-month')]"),"Current month and year");
+        private DropList _monthDropList = new DropList(By.XPath("//select[contains(@class,'month-select')]"), "Month drop List");
+        private DropList _yearDropList = new DropList(By.XPath("//select[contains(@class,'year-select')]"), "Year drop List");
+        private Text _currentMonthAndYear = new Text(By.XPath("//div[contains(@class,'current-month')]"),"Current month and year");
 
         private By _locatorForDay(string month, string day) 
-            => By.XPath($"//div[contains(@class, 'datepicker__month')]//div[contains(@aria-label, '{month}') and text()='{day}']");
-
+            => By.XPath($"//div[contains(@class,'datepicker__month')]//div[contains(@aria-label,'{month}') and text()='{day}']");
 
         public DatePickerPage() : base(new TextField(By.XPath("//input[@id='dateAndTimePickerInput']"), "Date and Time field"),"Data Picker Page") { }
 
@@ -69,7 +68,6 @@ namespace Task3.PageObjects
         public string GetCurrentMonth()
         {
            return UtilityClass.GetRidOfNumbers(_currentMonthAndYear.GetText());
-        }
-        
+        }        
     }
 }

@@ -2,6 +2,7 @@
 using Task3.Base;
 using Task3.Elements;
 using Task3.Models;
+using Task3.Utility;
 
 namespace Task3.PageObjects
 {
@@ -30,13 +31,14 @@ namespace Task3.PageObjects
         {
             return new Button(LocatorForDeletTheUserButton(user), "User Delet Button").GetElements() == 1;           
         }
+
         public void DeletTheUser(User user)
         {
             if (IsUserInTable(user))
             {
+                LogUtils.MakeSystemLog($"User deleted {user.FirstName}  {user.LastName}");
                 new Button(LocatorForDeletTheUserButton(user), "User Delet Button").Click();
             }
-
         }
 
         public int HowManyUsersInTable()

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using Task3.Base;
-using Task3.Elements;
 using Task3.Models;
 using Task3.PageObjects;
 using Task3.Utility;
@@ -61,7 +59,7 @@ namespace Task3
             Assert.AreEqual("Please enter your name", AlertUtility.GetTextFromAlert(), "Sentences are not equal");
             
             LogUtils.MakeSystemLog("STEP 8");
-            Assert.AreEqual($"You entered {AlertUtility.SendStrToAlert(UtilityClass.GetRandomGuid())}", alertsPage.GetPromptSpanText());
+            Assert.AreEqual($"You entered {AlertUtility.SendStrToAlert(UtilityClass.GetRandomGuid())}", alertsPage.GetPromptSpanText(),"Not equal value");
             Assert.IsFalse(AlertUtility.IsThereAlert(), "There is ALERT");
         }
 
@@ -203,7 +201,7 @@ namespace Task3
             sliderForm.MoveSliderByX(-2000);
             int rndInt = UtilityClass.GetRandomInt(0, 100);
             sliderForm.SetSliderValue(rndInt);
-            Assert.IsTrue(rndInt.ToString() == sliderForm.GetSliderValue());
+            Assert.IsTrue(rndInt.ToString() == sliderForm.GetSliderValue(), "Not equal value");
 
             LogUtils.MakeSystemLog("STEP 4");
             leftPanel.ClickProgressBar();
@@ -211,7 +209,7 @@ namespace Task3
 
             LogUtils.MakeSystemLog("STEP 5");
             progressBar.ClickStartAndStopWhenValueApeears(Convert.ToInt32(UtilityClass.ReturnValue(UtilityClass.data, "age")));
-            Assert.AreEqual(UtilityClass.ReturnValue(UtilityClass.data, "age"), progressBar.GetProgressBarValue());            
+            Assert.AreEqual(UtilityClass.ReturnValue(UtilityClass.data, "age"), progressBar.GetProgressBarValue(), "Not equal age");            
         }
 
         [Test]
@@ -265,7 +263,7 @@ namespace Task3
 
             LogUtils.MakeSystemLog("STEP 4");
             uploadAndDownload.SendUpload(fileInfo.FullName);
-            Assert.IsTrue(uploadAndDownload.GetUploadFilePatheText().Contains(fileInfo.Name));
+            Assert.IsTrue(uploadAndDownload.GetUploadFilePatheText().Contains(fileInfo.Name), "Path not contains fileName");
             UtilityClass.DeletFile(fileInfo.FullName);
         }
     }

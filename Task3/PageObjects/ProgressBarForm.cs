@@ -25,7 +25,8 @@ namespace Task3.PageObjects
                 LogUtils.MakeSystemLog("The Value was incorrect. Method was break");
                 return;
             }
-            
+
+            LogUtils.MakeSystemLog($"Progress bar will stop on {value}");
             string nowValue;           
             ClickStartStopButton();
             

@@ -6,7 +6,7 @@ namespace Task3.PageObjects
 {
     public class BrowserWindowsForm : BaseForm
     {
-        private Button _newTabButton = new Button(By.XPath("//button[@id='tabButton']"), "New Tab Button");
+        private  Button _newTabButton = new Button(By.XPath("//button[@id='tabButton']"), "New Tab Button");
 
         public BrowserWindowsForm() : base(new Button(By.XPath("//button[@id='tabButton']"), "New Tab Button"),"Browser Windows Form") { }
 

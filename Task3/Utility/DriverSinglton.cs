@@ -34,7 +34,7 @@ namespace Task3.Utility
         }
 
         public static string GetUrl()
-        {
+        {            
             return driver.Url;
         }
 

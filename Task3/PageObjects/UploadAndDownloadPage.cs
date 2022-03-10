@@ -35,7 +35,5 @@ namespace Task3.PageObjects
         {
             return _uploadFilePath.GetText();
         }
-
-
     }
 }

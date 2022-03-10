@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Task3.Utility
 {
     public static class AlertUtility
@@ -12,18 +11,21 @@ namespace Task3.Utility
 
         public static void AcceptAlert()
         {
+            LogUtils.MakeSystemLog($"Alert was accepted");
             Expectations.WaintUntilAlert();
             DriverSinglton.InizializeWebDriver().SwitchTo().Alert().Accept();
         } 
 
         public static void DismisAlert()
         {
+            LogUtils.MakeSystemLog($"Alert was dismiss");
             Expectations.WaintUntilAlert();
             DriverSinglton.InizializeWebDriver().SwitchTo().Alert().Dismiss();
         }
 
         public static string SendStrToAlert(string str)
-        {            
+        {
+            LogUtils.MakeSystemLog($"Send to alert {str}");
             Expectations.WaintUntilAlert();
             DriverSinglton.InizializeWebDriver().SwitchTo().Alert().SendKeys(str);
             AcceptAlert();
@@ -34,12 +36,14 @@ namespace Task3.Utility
         {
             try
             {
+                LogUtils.MakeSystemLog($"Alert here");
                 Expectations.WaintUntilAlert();
                 DriverSinglton.InizializeWebDriver().SwitchTo().Alert().GetHashCode();
                 return true;
             }
             catch
             {
+                LogUtils.MakeSystemLog($"Alert not here");
                 return false;
             }               
         }
