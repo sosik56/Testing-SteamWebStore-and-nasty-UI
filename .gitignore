@@ -155,6 +155,7 @@ coverage*.info
 *.coverage
 *.coveragexml
 
+
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
@@ -621,3 +622,7 @@ Task3/obj/Debug/net5.0/Task3.GeneratedMSBuildEditorConfig.editorconfig
 Task3/obj/project.assets.json
 Task3/obj/project.nuget.cache
 Task3/obj/Task3.csproj.nuget.dgspec.json
+*.editorconfig
+*.cache
+*.dgspec
+*.assets
